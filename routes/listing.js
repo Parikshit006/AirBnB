@@ -7,6 +7,8 @@ const listingController = require("../controllers/listings.js");
 const multer  = require('multer')
 const {storage} = require("../cloudConfug.js");
 const upload = multer({ storage });
+const getCoordinates = require("../utils/geoCode");
+
 
 // index route
 
