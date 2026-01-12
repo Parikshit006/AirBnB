@@ -1,5 +1,5 @@
 const cloudinary = require("cloudinary").v2;
-const multerStorage = require("multer-storage-cloudinary");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -7,7 +7,7 @@ cloudinary.config({
   api_secret: process.env.CLOUD_API_SECRET,
 });
 
-const storage = new multerStorage.CloudinaryStorage({
+const storage = new CloudinaryStorage({
   cloudinary,
   params: {
     folder: "AirBnB",
