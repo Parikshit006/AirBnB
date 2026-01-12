@@ -1,4 +1,4 @@
-const cloudinary = require("cloudinary").v2;
+const cloudinary = require("cloudinary");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 cloudinary.config({
@@ -11,7 +11,7 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: {
     folder: "AirBnB-Dev",
-    allowed_formats: ["png", "jpg", "jpeg"],
+    allowedFormats: ["jpeg", "png", "jpg"],
   },
 });
 
