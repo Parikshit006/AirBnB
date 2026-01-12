@@ -111,6 +111,13 @@
 
   <hr />
 
+  <% if (
+  listing.geometry &&
+  listing.geometry.coordinates &&
+  !(listing.geometry.coordinates[0] === 0 && listing.geometry.coordinates[1] === 0)
+    ) { %>
+
+
 <div
   id="map"
   data-coords='<%- JSON.stringify(listing.geometry.coordinates) %>'
@@ -144,6 +151,11 @@
     }
   }
 </script>
+
+<% } else { %>
+  <p class="text-muted mt-3">📍 Location map not available for this listing.</p>
+<% } %>
+
 
 
 </div>
