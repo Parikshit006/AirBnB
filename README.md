@@ -161,6 +161,5 @@ Better UI animations
 
 🙌 Author
 
-Parikshit Patil
-Engineering Student | Full-Stack Developer
+Parikshit Patil | Full-Stack Developer
 GitHub: Parikshit006
