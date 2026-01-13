@@ -1,6 +1,4 @@
 const Listing = require("../Models/listing");
-const getCoordinates = require("../utils/geoCode");
-
 
 module.exports.index = async(req,res)=>{
     const allListings = await Listing.find({});
@@ -29,31 +27,17 @@ module.exports.showListings = async (req,res)=>{
     res.render("listings/show.ejs" , {listing}); 
 };
 
-module.exports.createListing = async (req, res) => {
+module.exports.createListing = async (req, res , next) => {     
+        let url = req.file.path;
+        let filename = req.file.filename;
 
-    const geoData = await getCoordinates(req.body.listing.location);
+         const newListing = new Listing(req.body.listing);
+         newListing.owner = req.user._id; 
+         newListing.image = {url,filename};
+         await newListing.save();
+         req.flash("success", "New listing is created!!");
+         res.redirect("/listings");
 
-    if (!geoData) {
-        req.flash("error", "Invalid location. Please try again.");
-        return res.redirect("/listings/new");
-    }
-
-    const newListing = new Listing(req.body.listing);
-
-    newListing.geometry = geoData;
-    newListing.owner = req.user._id;
-
-    if (req.file) {
-        newListing.image = {
-            url: req.file.path,
-            filename: req.file.filename,
-        };
-    }
-
-    await newListing.save();
-
-    req.flash("success", "New listing is created!!");
-    res.redirect("/listings");
 };
 
 module.exports.editListing = async (req,res)=>{
